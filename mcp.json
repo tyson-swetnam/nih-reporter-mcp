@@ -1,0 +1,60 @@
+{
+  "name": "nih-reporter-mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol server for NIH RePORTER API - search and analyze federal research grant data",
+  "icon": "https://raw.githubusercontent.com/yourusername/nih-reporter-mcp/main/icon.png",
+  "author": {
+    "name": "Your Name",
+    "url": "https://github.com/yourusername"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/yourusername/nih-reporter-mcp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/nih-reporter-mcp.git"
+  },
+  "capabilities": {
+    "tools": {
+      "search_awards": {
+        "description": "Search NIH research awards and grants",
+        "category": "research"
+      },
+      "get_project": {
+        "description": "Get detailed project information",
+        "category": "research"
+      },
+      "search_pis": {
+        "description": "Search principal investigators",
+        "category": "research"
+      },
+      "get_publications": {
+        "description": "Search linked publications",
+        "category": "research"
+      }
+    }
+  },
+  "configuration": {
+    "env": {
+      "NIH_API_BASE_URL": {
+        "type": "string",
+        "default": "https://api.reporter.nih.gov",
+        "description": "NIH RePORTER API base URL"
+      },
+      "RATE_LIMIT_REQUESTS_PER_SECOND": {
+        "type": "number",
+        "default": 1,
+        "description": "Maximum requests per second (NIH recommends 1)"
+      },
+      "CACHE_ENABLED": {
+        "type": "boolean",
+        "default": true,
+        "description": "Enable response caching"
+      },
+      "CACHE_TTL": {
+        "type": "number",
+        "default": 3600000,
+        "description": "Cache TTL in milliseconds (default 1 hour)"
+      }
+    }
+  }
+}
