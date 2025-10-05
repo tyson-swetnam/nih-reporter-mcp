@@ -66,8 +66,8 @@ export const searchAwardsSchema = {
               },
               search_field: {
                 type: 'string',
-                enum: ['projecttitle', 'abstract', 'terms', 'phr'],
-                description: 'Field to search in',
+                enum: ['projecttitle', 'abstracttext', 'terms', 'phrtext', 'all'],
+                description: 'Field to search in (use "all" to search all fields)',
               },
               search_text: {
                 type: 'string',
