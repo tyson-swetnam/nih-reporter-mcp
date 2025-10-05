@@ -266,3 +266,92 @@ export function validateApplicationIds(applIds) {
 
   return { valid: true };
 }
+
+/**
+ * Validate PI profile IDs
+ *
+ * @param {Array<number>} profileIds - Array of PI profile IDs
+ * @returns {Object} { valid: boolean, error?: string }
+ */
+export function validatePIProfileIds(profileIds) {
+  if (!Array.isArray(profileIds)) {
+    return { valid: false, error: 'PI profile IDs must be an array' };
+  }
+
+  if (profileIds.length === 0) {
+    return { valid: false, error: 'PI profile IDs array cannot be empty' };
+  }
+
+  for (const id of profileIds) {
+    if (!Number.isInteger(id) || id < 0) {
+      return {
+        valid: false,
+        error: `Invalid PI profile ID: ${id}. Must be a non-negative integer`,
+      };
+    }
+  }
+
+  return { valid: true };
+}
+
+/**
+ * Validate spending categories
+ *
+ * @param {Object} spendingCategories - Spending categories object
+ * @returns {Object} { valid: boolean, error?: string }
+ */
+export function validateSpendingCategories(spendingCategories) {
+  if (!spendingCategories || typeof spendingCategories !== 'object') {
+    return { valid: false, error: 'Spending categories must be an object' };
+  }
+
+  if (!Array.isArray(spendingCategories.values)) {
+    return { valid: false, error: 'Spending categories values must be an array' };
+  }
+
+  if (spendingCategories.values.length === 0) {
+    return { valid: false, error: 'Spending categories values array cannot be empty' };
+  }
+
+  for (const id of spendingCategories.values) {
+    if (!Number.isInteger(id) || id < 0) {
+      return {
+        valid: false,
+        error: `Invalid spending category ID: ${id}. Must be a non-negative integer`,
+      };
+    }
+  }
+
+  if (spendingCategories.match_all !== undefined && typeof spendingCategories.match_all !== 'boolean') {
+    return { valid: false, error: 'match_all must be a boolean' };
+  }
+
+  return { valid: true };
+}
+
+/**
+ * Validate opportunity numbers
+ *
+ * @param {Array<string>} opportunityNumbers - Array of funding opportunity numbers
+ * @returns {Object} { valid: boolean, error?: string }
+ */
+export function validateOpportunityNumbers(opportunityNumbers) {
+  if (!Array.isArray(opportunityNumbers)) {
+    return { valid: false, error: 'Opportunity numbers must be an array' };
+  }
+
+  if (opportunityNumbers.length === 0) {
+    return { valid: false, error: 'Opportunity numbers array cannot be empty' };
+  }
+
+  for (const num of opportunityNumbers) {
+    if (typeof num !== 'string' || num.trim().length === 0) {
+      return {
+        valid: false,
+        error: `Invalid opportunity number: ${num}. Must be a non-empty string`,
+      };
+    }
+  }
+
+  return { valid: true };
+}

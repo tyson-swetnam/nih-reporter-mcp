@@ -239,6 +239,30 @@ export class SearchAwardsTool {
       };
     }
 
+    // Phase 3 LOW priority parameters
+    if (criteria.pi_profile_ids?.length) {
+      request.criteria.pi_profile_ids = criteria.pi_profile_ids;
+    }
+
+    if (criteria.spending_categories) {
+      request.criteria.spending_categories = {
+        Values: criteria.spending_categories.values,
+        match_all: criteria.spending_categories.match_all ? 'true' : 'false',
+      };
+    }
+
+    if (criteria.opportunity_numbers?.length) {
+      request.criteria.opportunity_numbers = criteria.opportunity_numbers;
+    }
+
+    if (criteria.is_agency_admin !== undefined) {
+      request.criteria.is_agency_admin = criteria.is_agency_admin;
+    }
+
+    if (criteria.is_agency_funding !== undefined) {
+      request.criteria.is_agency_funding = criteria.is_agency_funding;
+    }
+
     if (sortField) {
       request.sort_field = sortField;
       request.sort_order = sortOrder || 'desc';

@@ -231,6 +231,41 @@ export const searchAwardsSchema = {
               },
             },
           },
+          // Phase 3 LOW priority parameters
+          pi_profile_ids: {
+            type: 'array',
+            items: { type: 'integer' },
+            description: 'Direct PI profile ID lookup (e.g., [0, 1, 12345])',
+          },
+          spending_categories: {
+            type: 'object',
+            description: 'NIH Spending Category (RCDC) filters',
+            properties: {
+              values: {
+                type: 'array',
+                items: { type: 'integer' },
+                description: 'RCDC category IDs (e.g., [27, 92])',
+              },
+              match_all: {
+                type: 'boolean',
+                description: 'If true, projects must match ALL categories; if false, at least one (default: false)',
+                default: false,
+              },
+            },
+          },
+          opportunity_numbers: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Funding opportunity announcement numbers (e.g., ["RFA-DA-18-020", "PAR-18-218"])',
+          },
+          is_agency_admin: {
+            type: 'boolean',
+            description: 'Filter for projects where agency is the administering IC (default: undefined)',
+          },
+          is_agency_funding: {
+            type: 'boolean',
+            description: 'Filter for projects where agency is the funding IC (default: undefined)',
+          },
         },
       },
       pagination: {

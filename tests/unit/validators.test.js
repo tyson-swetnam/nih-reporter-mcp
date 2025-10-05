@@ -10,6 +10,9 @@ import {
   validateCovidCategory,
   validateCovidCategories,
   validateApplicationIds,
+  validatePIProfileIds,
+  validateSpendingCategories,
+  validateOpportunityNumbers,
 } from '../../src/utils/validators.js';
 
 describe('Validators', () => {
@@ -162,6 +165,77 @@ describe('Validators', () => {
 
     it('should reject empty array', () => {
       expect(validateApplicationIds([]).valid).toBe(false);
+    });
+  });
+
+  describe('validatePIProfileIds', () => {
+    it('should validate correct PI profile IDs', () => {
+      const result = validatePIProfileIds([0, 1, 12345]);
+      expect(result.valid).toBe(true);
+    });
+
+    it('should accept zero as valid ID', () => {
+      const result = validatePIProfileIds([0]);
+      expect(result.valid).toBe(true);
+    });
+
+    it('should reject non-integer IDs', () => {
+      expect(validatePIProfileIds([1, 2.5]).valid).toBe(false);
+    });
+
+    it('should reject negative IDs', () => {
+      expect(validatePIProfileIds([1, -5]).valid).toBe(false);
+    });
+
+    it('should reject empty array', () => {
+      expect(validatePIProfileIds([]).valid).toBe(false);
+    });
+  });
+
+  describe('validateSpendingCategories', () => {
+    it('should validate correct spending categories', () => {
+      const result = validateSpendingCategories({ values: [27, 92], match_all: false });
+      expect(result.valid).toBe(true);
+    });
+
+    it('should accept categories without match_all', () => {
+      const result = validateSpendingCategories({ values: [27, 92] });
+      expect(result.valid).toBe(true);
+    });
+
+    it('should reject non-array values', () => {
+      expect(validateSpendingCategories({ values: 27 }).valid).toBe(false);
+    });
+
+    it('should reject empty values array', () => {
+      expect(validateSpendingCategories({ values: [] }).valid).toBe(false);
+    });
+
+    it('should reject negative category IDs', () => {
+      expect(validateSpendingCategories({ values: [27, -5] }).valid).toBe(false);
+    });
+
+    it('should reject non-boolean match_all', () => {
+      expect(validateSpendingCategories({ values: [27], match_all: 'true' }).valid).toBe(false);
+    });
+  });
+
+  describe('validateOpportunityNumbers', () => {
+    it('should validate correct opportunity numbers', () => {
+      const result = validateOpportunityNumbers(['RFA-DA-18-020', 'PAR-18-218']);
+      expect(result.valid).toBe(true);
+    });
+
+    it('should reject non-string values', () => {
+      expect(validateOpportunityNumbers(['RFA-DA-18-020', 123]).valid).toBe(false);
+    });
+
+    it('should reject empty strings', () => {
+      expect(validateOpportunityNumbers(['RFA-DA-18-020', '  ']).valid).toBe(false);
+    });
+
+    it('should reject empty array', () => {
+      expect(validateOpportunityNumbers([]).valid).toBe(false);
     });
   });
 });
