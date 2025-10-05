@@ -15,11 +15,15 @@ import { formatErrorResponse } from './utils/error-handler.js';
 
 export class NIHReporterServer {
   constructor(config = {}) {
+    // Store server info for logging
+    this.serverName = config.name || process.env.MCP_SERVER_NAME || 'nih-reporter-mcp';
+    this.serverVersion = config.version || process.env.MCP_SERVER_VERSION || '1.0.0';
+
     // Initialize MCP server
     this.server = new Server(
       {
-        name: config.name || process.env.MCP_SERVER_NAME || 'nih-reporter-mcp',
-        version: config.version || process.env.MCP_SERVER_VERSION || '1.0.0',
+        name: this.serverName,
+        version: this.serverVersion,
       },
       {
         capabilities: {
@@ -104,7 +108,7 @@ export class NIHReporterServer {
 
     // Log to stderr so it doesn't interfere with MCP protocol on stdout
     console.error('NIH RePORTER MCP Server started');
-    console.error(`Server: ${this.server.serverInfo.name} v${this.server.serverInfo.version}`);
+    console.error(`Server: ${this.serverName} v${this.serverVersion}`);
     console.error(`Tools registered: ${this.tools.size}`);
   }
 
@@ -113,8 +117,8 @@ export class NIHReporterServer {
    */
   getInfo() {
     return {
-      name: this.server.serverInfo.name,
-      version: this.server.serverInfo.version,
+      name: this.serverName,
+      version: this.serverVersion,
       tools: Array.from(this.tools.keys()),
       rateLimiter: this.apiClient.getRateLimiterState(),
     };

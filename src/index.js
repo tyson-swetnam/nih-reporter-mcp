@@ -17,9 +17,9 @@ async function main() {
   try {
     // Create cache manager
     const cache = new CacheManager({
-      maxSize: process.env.CACHE_MAX_SIZE,
-      ttl: process.env.CACHE_TTL,
-      enabled: process.env.CACHE_ENABLED,
+      maxSize: process.env.CACHE_MAX_SIZE ? parseInt(process.env.CACHE_MAX_SIZE, 10) : undefined,
+      ttl: process.env.CACHE_TTL ? parseInt(process.env.CACHE_TTL, 10) : undefined,
+      enabled: process.env.CACHE_ENABLED ? process.env.CACHE_ENABLED !== 'false' : undefined,
     });
 
     // Create server instance
@@ -28,9 +28,9 @@ async function main() {
       version: process.env.MCP_SERVER_VERSION,
       api: {
         baseURL: process.env.NIH_API_BASE_URL,
-        timeout: process.env.NIH_API_TIMEOUT,
-        requestsPerSecond: process.env.RATE_LIMIT_REQUESTS_PER_SECOND,
-        burstCapacity: process.env.RATE_LIMIT_BURST_CAPACITY,
+        timeout: process.env.NIH_API_TIMEOUT ? parseInt(process.env.NIH_API_TIMEOUT, 10) : undefined,
+        requestsPerSecond: process.env.RATE_LIMIT_REQUESTS_PER_SECOND ? parseFloat(process.env.RATE_LIMIT_REQUESTS_PER_SECOND) : undefined,
+        burstCapacity: process.env.RATE_LIMIT_BURST_CAPACITY ? parseInt(process.env.RATE_LIMIT_BURST_CAPACITY, 10) : undefined,
       },
     });
 
