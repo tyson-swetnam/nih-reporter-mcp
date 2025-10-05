@@ -157,6 +157,80 @@ export const searchAwardsSchema = {
             items: { type: 'string' },
             description: 'Filter by COVID-19 response categories (e.g., ["Reg-CV", "C3", "C4", "C5", "C6"])',
           },
+          // Phase 2 MEDIUM priority parameters
+          po_names: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                first_name: { type: 'string' },
+                last_name: { type: 'string' },
+                any_name: { type: 'string' },
+              },
+            },
+            description: 'Program Officer names (e.g., [{"last_name": "Smith", "first_name": "John"}] or [{"any_name": "Smith"}])',
+          },
+          org_names_exact_match: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Exact organization name matching (e.g., ["Harvard University"])',
+          },
+          org_cities: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Filter by organization cities (e.g., ["Boston", "New York", "San Francisco"])',
+          },
+          org_countries: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Filter by organization countries (e.g., ["United States", "Canada", "United Kingdom"])',
+          },
+          funding_mechanism: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Funding mechanism codes (e.g., ["R", "P", "U"])',
+          },
+          dept_types: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Department types (e.g., ["SCHOOLS OF MEDICINE", "SCHOOLS OF PUBLIC HEALTH"])',
+          },
+          cong_dists: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Congressional districts (e.g., ["CA-12", "NY-14", "TX-02"])',
+          },
+          organization_type: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Organization types (e.g., ["HIGHER EDUCATION", "HOSPITALS"])',
+          },
+          multi_pi_only: {
+            type: 'boolean',
+            description: 'Filter to only multi-PI projects (default: false)',
+            default: false,
+          },
+          newly_added_projects_only: {
+            type: 'boolean',
+            description: 'Filter to only recently added projects (default: false)',
+            default: false,
+          },
+          date_added: {
+            type: 'object',
+            description: 'Filter by database addition date range',
+            properties: {
+              from_date: {
+                type: 'string',
+                pattern: '^\\d{4}-\\d{2}-\\d{2}$',
+                description: 'Start date (YYYY-MM-DD format)',
+              },
+              to_date: {
+                type: 'string',
+                pattern: '^\\d{4}-\\d{2}-\\d{2}$',
+                description: 'End date (YYYY-MM-DD format)',
+              },
+            },
+          },
         },
       },
       pagination: {

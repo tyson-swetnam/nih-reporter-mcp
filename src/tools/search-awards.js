@@ -191,6 +191,54 @@ export class SearchAwardsTool {
       request.criteria.covid_response = criteria.covid_response;
     }
 
+    // Phase 2 MEDIUM priority parameters
+    if (criteria.po_names?.length) {
+      request.criteria.po_names = criteria.po_names;
+    }
+
+    if (criteria.org_names_exact_match?.length) {
+      request.criteria.org_names_exact_match = criteria.org_names_exact_match;
+    }
+
+    if (criteria.org_cities?.length) {
+      request.criteria.org_cities = criteria.org_cities;
+    }
+
+    if (criteria.org_countries?.length) {
+      request.criteria.org_countries = criteria.org_countries;
+    }
+
+    if (criteria.funding_mechanism?.length) {
+      request.criteria.funding_mechanism = criteria.funding_mechanism;
+    }
+
+    if (criteria.dept_types?.length) {
+      request.criteria.dept_types = criteria.dept_types;
+    }
+
+    if (criteria.cong_dists?.length) {
+      request.criteria.cong_dists = criteria.cong_dists;
+    }
+
+    if (criteria.organization_type?.length) {
+      request.criteria.organization_type = criteria.organization_type;
+    }
+
+    if (criteria.multi_pi_only !== undefined) {
+      request.criteria.multi_pi_only = criteria.multi_pi_only;
+    }
+
+    if (criteria.newly_added_projects_only !== undefined) {
+      request.criteria.newly_added_projects_only = criteria.newly_added_projects_only;
+    }
+
+    if (criteria.date_added) {
+      request.criteria.date_added = {
+        from_date: criteria.date_added.from_date,
+        to_date: criteria.date_added.to_date,
+      };
+    }
+
     if (sortField) {
       request.sort_field = sortField;
       request.sort_order = sortOrder || 'desc';
