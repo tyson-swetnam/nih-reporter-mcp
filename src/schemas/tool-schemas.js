@@ -83,6 +83,80 @@ export const searchAwardsSchema = {
             type: 'integer',
             description: 'Maximum award amount in dollars',
           },
+          // Phase 1 HIGH priority parameters
+          include_active_projects: {
+            type: 'boolean',
+            description: 'Filter to only currently active projects (default: false)',
+            default: false,
+          },
+          org_states: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Filter by organization US state codes (e.g., ["CA", "NY", "MA"])',
+          },
+          appl_ids: {
+            type: 'array',
+            items: { type: 'integer' },
+            description: 'NIH application IDs for direct lookup (e.g., [10001234, 10005678])',
+          },
+          project_start_date: {
+            type: 'object',
+            description: 'Filter by project start date range',
+            properties: {
+              from_date: {
+                type: 'string',
+                pattern: '^\\d{4}-\\d{2}-\\d{2}$',
+                description: 'Start date (YYYY-MM-DD format)',
+              },
+              to_date: {
+                type: 'string',
+                pattern: '^\\d{4}-\\d{2}-\\d{2}$',
+                description: 'End date (YYYY-MM-DD format)',
+              },
+            },
+          },
+          project_end_date: {
+            type: 'object',
+            description: 'Filter by project end date range',
+            properties: {
+              from_date: {
+                type: 'string',
+                pattern: '^\\d{4}-\\d{2}-\\d{2}$',
+                description: 'Start date (YYYY-MM-DD format)',
+              },
+              to_date: {
+                type: 'string',
+                pattern: '^\\d{4}-\\d{2}-\\d{2}$',
+                description: 'End date (YYYY-MM-DD format)',
+              },
+            },
+          },
+          award_notice_date: {
+            type: 'object',
+            description: 'Filter by award notice date range',
+            properties: {
+              from_date: {
+                type: 'string',
+                pattern: '^\\d{4}-\\d{2}-\\d{2}$',
+                description: 'Start date (YYYY-MM-DD format)',
+              },
+              to_date: {
+                type: 'string',
+                pattern: '^\\d{4}-\\d{2}-\\d{2}$',
+                description: 'End date (YYYY-MM-DD format)',
+              },
+            },
+          },
+          exclude_subprojects: {
+            type: 'boolean',
+            description: 'Exclude subproject awards from results (default: false)',
+            default: false,
+          },
+          covid_response: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Filter by COVID-19 response categories (e.g., ["Reg-CV", "C3", "C4", "C5", "C6"])',
+          },
         },
       },
       pagination: {

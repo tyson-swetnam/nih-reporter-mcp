@@ -149,6 +149,48 @@ export class SearchAwardsTool {
       request.exclude_fields = criteria.exclude_fields;
     }
 
+    // Phase 1 HIGH priority parameters
+    if (criteria.include_active_projects !== undefined) {
+      request.criteria.include_active_projects = criteria.include_active_projects;
+    }
+
+    if (criteria.org_states?.length) {
+      request.criteria.org_states = criteria.org_states;
+    }
+
+    if (criteria.appl_ids?.length) {
+      request.criteria.appl_ids = criteria.appl_ids;
+    }
+
+    if (criteria.project_start_date) {
+      request.criteria.project_start_date = {
+        from_date: criteria.project_start_date.from_date,
+        to_date: criteria.project_start_date.to_date,
+      };
+    }
+
+    if (criteria.project_end_date) {
+      request.criteria.project_end_date = {
+        from_date: criteria.project_end_date.from_date,
+        to_date: criteria.project_end_date.to_date,
+      };
+    }
+
+    if (criteria.award_notice_date) {
+      request.criteria.award_notice_date = {
+        from_date: criteria.award_notice_date.from_date,
+        to_date: criteria.award_notice_date.to_date,
+      };
+    }
+
+    if (criteria.exclude_subprojects !== undefined) {
+      request.criteria.exclude_subprojects = criteria.exclude_subprojects;
+    }
+
+    if (criteria.covid_response?.length) {
+      request.criteria.covid_response = criteria.covid_response;
+    }
+
     if (sortField) {
       request.sort_field = sortField;
       request.sort_order = sortOrder || 'desc';
